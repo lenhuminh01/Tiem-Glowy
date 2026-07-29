@@ -104,6 +104,22 @@ function detectPlatform(url: string, explicitPlatform?: string): 'Shopee' | 'Tik
   return 'Shopee';
 }
 
+function convertDriveUrl(url: string): string {
+  if (!url) return '';
+  const trimmed = url.trim();
+  if (trimmed.includes('drive.google.com') || trimmed.includes('docs.google.com')) {
+    const matchPath = trimmed.match(/\/d\/([\w-]{25,})/);
+    if (matchPath && matchPath[1]) {
+      return `https://lh3.googleusercontent.com/d/${matchPath[1]}`;
+    }
+    const matchQuery = trimmed.match(/id=([\w-]{25,})/);
+    if (matchQuery && matchQuery[1]) {
+      return `https://lh3.googleusercontent.com/d/${matchQuery[1]}`;
+    }
+  }
+  return trimmed;
+}
+
 function inferCategoryFromTitle(title: string, rawCategory?: string): MainCategory {
   if (rawCategory && ['skincare', 'makeup', 'bodycare', 'haircare', 'fashion', 'lifestyle', 'grocery', 'snacks'].includes(rawCategory.toLowerCase())) {
     return rawCategory.toLowerCase() as MainCategory;
@@ -213,8 +229,10 @@ export async function fetchProducts(): Promise<Product[]> {
       const shopName = getValue(row, 'shopname', 'shop', 'brand', 'ten_shop') || 'Dottie Official Store';
       let rawImage = getValue(row, 'image', 'img', 'thumbnail', 'hinhanh', 'hinh_anh');
 
-      if (!rawImage || rawImage.toLowerCase().includes('loading...') || !rawImage.startsWith('http')) {
+      if (!rawImage || rawImage.toLowerCase().includes('loading...')) {
         rawImage = '';
+      } else {
+        rawImage = convertDriveUrl(rawImage);
       }
 
       const isHostPick = parseBoolean(getValue(row, 'ishostpick', 'hostpick', 'host_pick', 'top_pick'));
@@ -291,17 +309,9 @@ export async function fetchTikTokVideos(): Promise<TikTokPost[]> {
         }
 
         const rawThumb = getValue(row, 'thumblink', 'thumbnail', 'thumb');
-        let thumbLink = (rawThumb && rawThumb.startsWith('http')) ? rawThumb : '';
+        let thumbLink = convertDriveUrl(rawThumb);
 
-        // Handle Google Drive links if provided in ThumbLink
-        if (thumbLink.includes('drive.google.com')) {
-          const driveId = thumbLink.match(/[\w-]{25,}/)?.[0];
-          if (driveId) {
-            thumbLink = `https://lh3.googleusercontent.com/d/${driveId}`;
-          }
-        }
-
-        // Fallback to high quality fashion thumbnail if empty or invalid text
+        // Fallback only if no thumb link provided
         if (!thumbLink) {
           thumbLink = idx % 2 === 0
             ? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80"
