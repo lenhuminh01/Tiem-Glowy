@@ -9,14 +9,24 @@ export interface AIRecommendationResult {
 
 export class AIRecommendationService {
   /**
-   * Future AI Lynie Query Builder
-   * Matches user's beauty profile against product catalog
+   * AI Lynie Query Builder
+   * Matches user's beauty profile against product catalog.
+   * MANDATORY: Products MUST belong to HB group (skincare, makeup, bodycare, haircare).
    */
   public static recommendForBeautyProfile(
     profile: BeautyProfile,
     products: Product[]
   ): AIRecommendationResult {
-    const scoredProducts = products.map((product) => {
+    // MANDATORY CONDITION: Filter strictly products belonging to HB group (skincare, makeup, bodycare, haircare)
+    const hbGroupCategories = ['skincare', 'makeup', 'bodycare', 'haircare'];
+    let hbProducts = products.filter((p) => hbGroupCategories.includes(p.category));
+
+    // Fallback if no HB products are found, exclude fashion/lifestyle
+    if (hbProducts.length === 0) {
+      hbProducts = products.filter((p) => p.category !== 'fashion' && p.category !== 'lifestyle');
+    }
+
+    const scoredProducts = hbProducts.map((product) => {
       let score = RecommendationEngine.calculateProductScore(product);
 
       // Match category
@@ -60,7 +70,7 @@ export class AIRecommendationService {
 
     return {
       matchScore: 95,
-      reasoning: `Dựa trên tình trạng da ${profile.skinConcern || 'của bạn'}, AI Lynie tuyển chọn ${topProducts.length} sản phẩm phù hợp nhất.`,
+      reasoning: `Dựa trên tình trạng da ${profile.skinConcern || 'của bạn'}, AI Lynie tuyển chọn ${topProducts.length} sản phẩm thuộc nhóm HB phù hợp nhất.`,
       recommendedProducts: topProducts,
     };
   }
