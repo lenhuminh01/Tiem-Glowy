@@ -65,6 +65,9 @@ export const TikTokSection: React.FC<TikTokSectionProps> = ({
                     src={post.thumbnail}
                     alt={post.videoTitle}
                     referrerPolicy="no-referrer"
+                    onError={(e) => {
+                      (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80";
+                    }}
                     className="h-full w-full object-cover object-center opacity-90 transition-transform duration-500 ease-out group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-black/20" />

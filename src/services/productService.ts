@@ -290,10 +290,23 @@ export async function fetchTikTokVideos(): Promise<TikTokPost[]> {
           return null;
         }
 
-        const thumbLink = getValue(row, 'thumblink', 'thumbnail', 'thumb') || 
-          (idx === 0
+        const rawThumb = getValue(row, 'thumblink', 'thumbnail', 'thumb');
+        let thumbLink = (rawThumb && rawThumb.startsWith('http')) ? rawThumb : '';
+
+        // Handle Google Drive links if provided in ThumbLink
+        if (thumbLink.includes('drive.google.com')) {
+          const driveId = thumbLink.match(/[\w-]{25,}/)?.[0];
+          if (driveId) {
+            thumbLink = `https://lh3.googleusercontent.com/d/${driveId}`;
+          }
+        }
+
+        // Fallback to high quality fashion thumbnail if empty or invalid text
+        if (!thumbLink) {
+          thumbLink = idx % 2 === 0
             ? "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80"
-            : "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80");
+            : "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=800&q=80";
+        }
             
         const productLink = getValue(row, 'productlink', 'product_link', 'product');
         const caption = getValue(row, 'caption', 'title', 'mo_ta') || `Video nổi bật #${idx + 1} @prettyglowprincess ✨`;
