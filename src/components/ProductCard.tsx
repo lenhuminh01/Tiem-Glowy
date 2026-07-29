@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Product } from '../types/storefront';
 import { Sparkles, Heart, Store, ShoppingBag } from 'lucide-react';
+import { TrackingService } from '../services/trackingService';
 
 interface ProductCardProps {
   product: Product;
-  onQuickView: (product: Product) => void;
+  onQuickView?: (product: Product) => void;
   showBadge?: boolean;
 }
 
 export const ProductCard: React.FC<ProductCardProps> = ({
   product,
-  onQuickView,
   showBadge = true,
 }) => {
   const [liked, setLiked] = useState(false);
@@ -18,9 +18,14 @@ export const ProductCard: React.FC<ProductCardProps> = ({
   const shopDisplayName = product.shopName || product.shop || product.brand || 'Dottie Official Store';
   const productTitle = product.name || product.title;
 
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    TrackingService.trackAndRedirect(product, 'product_card_click');
+  };
+
   return (
     <div
-      onClick={() => onQuickView(product)}
+      onClick={handleCardClick}
       className="group relative flex flex-col justify-between overflow-hidden rounded-[2rem] bg-white p-3.5 border border-[#E8DED8] transition-all duration-300 ease-out hover:border-[#D89B8B]/50 hover:shadow-xl hover:shadow-[#D89B8B]/10 cursor-pointer"
     >
       <div>

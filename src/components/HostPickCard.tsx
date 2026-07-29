@@ -1,16 +1,22 @@
 import React from 'react';
 import { Product } from '../types/storefront';
 import { Sparkles, Store } from 'lucide-react';
+import { TrackingService } from '../services/trackingService';
 
 interface HostPickCardProps {
   product: Product;
-  onSelectProduct: (product: Product) => void;
+  onSelectProduct?: (product: Product) => void;
 }
 
-export const HostPickCard: React.FC<HostPickCardProps> = ({ product, onSelectProduct }) => {
+export const HostPickCard: React.FC<HostPickCardProps> = ({ product }) => {
   const productTitle = product.name || product.title;
   const shopDisplayName = product.shopName || product.shop || product.brand || 'Dottie Official Store';
   const quoteText = product.lynieReview || product.description || 'Lynie thực sự thích món này!';
+
+  const handleCardClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    TrackingService.trackAndRedirect(product, 'host_pick_card_click');
+  };
 
   return (
     <section className="pt-1 pb-3 px-4 sm:px-6 max-w-xl mx-auto">
@@ -24,7 +30,7 @@ export const HostPickCard: React.FC<HostPickCardProps> = ({ product, onSelectPro
 
       {/* Hero Card */}
       <div 
-        onClick={() => onSelectProduct(product)}
+        onClick={handleCardClick}
         className="group relative overflow-hidden rounded-[2rem] bg-white border border-[#E8DED8] shadow-xs transition-all duration-300 hover:shadow-md cursor-pointer"
       >
         <div className="flex flex-col sm:flex-row items-stretch">
