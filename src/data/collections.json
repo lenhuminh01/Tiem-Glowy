@@ -1,0 +1,74 @@
+[
+  {
+    "id": "col-fashion",
+    "slug": "fashion",
+    "title": "👗 Thời trang",
+    "subtitle": "Outfit minimalist & Tone màu xinh xắn",
+    "image": "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1000&q=80",
+    "itemCount": 24,
+    "tag": "OOTD Code",
+    "description": "Trang phục tối giản, chất liệu mềm mại, tôn dáng cực kỳ dễ phối đồ.",
+    "featuredThumbnails": [
+      "https://images.unsplash.com/photo-1598554747436-c9293d6a588f?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=400&q=80"
+    ]
+  },
+  {
+    "id": "col-beauty",
+    "slug": "beauty",
+    "title": "💄 Làm đẹp",
+    "subtitle": "Chu trình Glass Skin & Lip Tint căng mọng",
+    "image": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=1000&q=80",
+    "itemCount": 18,
+    "tag": "Glowy Skincare",
+    "description": "Các món skincare Holy Grail & mỹ phẩm Lynie dùng mỗi ngày để da luôn căng bóng.",
+    "featuredThumbnails": [
+      "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1586495777744-4413f21062fa?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=400&q=80"
+    ]
+  },
+  {
+    "id": "col-lifestyle",
+    "slug": "lifestyle",
+    "title": "🏠 Lifestyle",
+    "subtitle": "Góc phòng xinh & Nến thơm ấm áp",
+    "image": "https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1000&q=80",
+    "itemCount": 15,
+    "tag": "Cozy Living",
+    "description": "Những món đồ chill chill biến căn phòng thành không gian thư giãn lý tưởng.",
+    "featuredThumbnails": [
+      "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=400&q=80"
+    ]
+  },
+  {
+    "id": "col-food",
+    "slug": "food",
+    "title": "🍜 Đồ ăn",
+    "subtitle": "Snack ngon & Trà detox Lynie mê",
+    "image": "https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=1000&q=80",
+    "itemCount": 12,
+    "tag": "Yummy Bites",
+    "description": "Món ăn vặt healthy, trà hoa cúc detox và bánh quy hạt dinh dưỡng Lynie hay ăn.",
+    "featuredThumbnails": [
+      "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1599490659213-e2b9527bd087?auto=format&fit=crop&w=400&q=80"
+    ]
+  },
+  {
+    "id": "col-home",
+    "slug": "home",
+    "title": "🛒 Gia dụng",
+    "subtitle": "Đồ dùng thông minh & Xinh xắn",
+    "image": "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=1000&q=80",
+    "itemCount": 16,
+    "tag": "Smart Home",
+    "description": "Các thiết bị gia dụng mini, hộp đựng mĩ phẩm xoay 360 độ và máy khuếch tán tinh dầu.",
+    "featuredThumbnails": [
+      "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?auto=format&fit=crop&w=400&q=80",
+      "https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&w=400&q=80"
+    ]
+  }
+]
